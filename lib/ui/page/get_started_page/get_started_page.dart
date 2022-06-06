@@ -23,46 +23,29 @@ class GetStartedPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => LocationConfigWidgetModel(),
-          ),
-          BlocProvider(
-            create: (_) => TestConfigWidgetModel(),
-          ),
-        ],
-        child: Center(
-          child: OrientationBuilder(
-            builder: (BuildContext context, Orientation orientation) {
-              return ListView(
-                scrollDirection: orientation == Orientation.landscape
-                    ? Axis.horizontal
-                    : Axis.vertical,
-                children: [
-                  DirectoryPicker(),
-                  _buildDivider(
-                    context: context,
-                    orientation: orientation,
-                  ),
-                  TopicFilter(),
-                  _buildDivider(
-                    context: context,
-                    orientation: orientation,
-                  ),
-                  TestConfig(),
-                ],
-              );
-            },
-          ),
+      body: Center(
+        child: OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+            return ListView(
+              scrollDirection: orientation == Orientation.landscape
+                  ? Axis.horizontal
+                  : Axis.vertical,
+              children: [
+                DirectoryPicker(),
+                _buildDivider(
+                  context: context,
+                  orientation: orientation,
+                ),
+                TopicFilter(),
+                _buildDivider(
+                  context: context,
+                  orientation: orientation,
+                ),
+                TestConfig(),
+              ],
+            );
+          },
         ),
-        // child: SingleChildScrollView(
-        //   child: Wrap(
-        //     children: const [
-        //       DirectoryPicker(),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

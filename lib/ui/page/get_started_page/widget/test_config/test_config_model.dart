@@ -1,14 +1,16 @@
 class TestConfigModel {
   final int? questionsCount;
-  final bool? showAnswer;
+  final bool? hasAnswer;
   final int? maxVariantsCount;
-  final bool? showTimer;
+  final bool? hasTimer;
+  final String output;
 
   TestConfigModel(
     this.questionsCount,
-    this.showAnswer,
+    this.hasAnswer,
     this.maxVariantsCount,
-    this.showTimer,
+    this.hasTimer,
+    this.output,
   );
 
   TestConfigModel copyWith({
@@ -16,11 +18,13 @@ class TestConfigModel {
     bool? showAnswer,
     int? maxVariantsCount,
     bool? showTimer,
+    String? output,
   }) =>
       TestConfigModel(
         questionsCount ?? this.questionsCount,
-        showAnswer ?? this.showAnswer,
+        showAnswer ?? this.hasAnswer,
         maxVariantsCount ?? this.maxVariantsCount,
-        showTimer ?? this.showTimer,
+        showTimer ?? this.hasTimer,
+        output ?? this.output,
       );
 }

@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_classifier/ui/page/get_started_page/widget/test_config/test_config_model.dart';
 
 class TestConfigWidgetModel extends Cubit<TestConfigModel> {
-  TestConfigWidgetModel() : super(TestConfigModel(10, false, 4, false));
+  TestConfigWidgetModel() : super(TestConfigModel(10, false, 4, false, ''));
 
   VoidCallback startTest({VoidCallback? onSuccess}) {
-    return () => {};
+    return () {
+      if (onSuccess != null) {
+        onSuccess.call();
+      }
+    };
   }
 
   void showTimer(bool? value) {

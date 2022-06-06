@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_classifier/ui/page/get_started_page/widget/test_config/test_config_widget_model.dart';
 
 class TestConfig extends StatelessWidget {
+
   const TestConfig({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class TestConfig extends StatelessWidget {
                   children: [
                     Text('Показывать ответы'),
                     Checkbox(
-                      value: widgetModel.state.showAnswer ?? false,
+                      value: widgetModel.state.hasAnswer ?? false,
                       onChanged: widgetModel.showAnswer,
                     ),
                   ],
@@ -99,7 +101,7 @@ class TestConfig extends StatelessWidget {
                   children: [
                     Text('Показать таймер'),
                     Checkbox(
-                      value: widgetModel.state.showTimer ?? false,
+                      value: widgetModel.state.hasTimer ?? false,
                       onChanged: widgetModel.showTimer,
                     ),
                   ],
