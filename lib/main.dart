@@ -32,16 +32,29 @@ class MyApp extends StatelessWidget {
         ),
         home: const GetStartedPage(),
         routes: {
-          '/test': (_) => BlocProvider(
-                create: (ctx) => TestPageWidgetModel.fromConfig(
-                  locationConfigModel:
-                      ctx.read<LocationConfigWidgetModel>().state,
-                  testConfigModel: ctx.read<TestConfigWidgetModel>().state,
-                ),
-                child: TestPage(),
-              ),
+          '/test': reduceTest,
         },
       ),
+    );
+  }
+
+  Widget reduceTest(BuildContext context) {
+    final testConfig = context.read<TestConfigWidgetModel>();
+    return FutureBuilder(
+      future: Future.sync(() => {
+        if(testConfig.validate){
+
+        }
+      }),
+      builder: (context, snap){
+        return BlocProvider(
+          create: (ctx) => TestPageWidgetModel.fromConfig(
+            locationConfigModel: ctx.read<LocationConfigWidgetModel>().state,
+            testConfigModel: ctx.read<TestConfigWidgetModel>().state,
+          ),
+          child: TestPage(),
+        );
+      },
     );
   }
 }

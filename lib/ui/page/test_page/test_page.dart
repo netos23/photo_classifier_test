@@ -19,8 +19,10 @@ class TestPage extends StatelessWidget {
                 if (widgetModel.hasAnswer)
                   Container(
                     color: widgetModel.lastCorrect ? Colors.green : Colors.red,
-                    child: Text(
-                        widgetModel.lastCorrect ? 'Правильно' : 'Неправильно'),
+                    child: Center(
+                      child: Text(
+                          widgetModel.lastCorrect ? 'Правильно' : 'Неправильно'),
+                    ),
                   )
               ],
             )

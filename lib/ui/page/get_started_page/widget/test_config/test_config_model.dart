@@ -3,7 +3,7 @@ class TestConfigModel {
   final bool? hasAnswer;
   final int? maxVariantsCount;
   final bool? hasTimer;
-  final String output;
+  final String? output;
 
   TestConfigModel(
     this.questionsCount,

@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_classifier/ui/page/get_started_page/widget/test_config/test_config_widget_model.dart';
 
 class TestConfig extends StatelessWidget {
-
   const TestConfig({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,10 @@ class TestConfig extends StatelessWidget {
                   children: [
                     Text(
                       'Настройки теста',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline4,
                     ),
                     IconButton(
                       icon: Icon(Icons.help),
@@ -104,6 +105,17 @@ class TestConfig extends StatelessWidget {
                       value: widgetModel.state.hasTimer ?? false,
                       onChanged: widgetModel.showTimer,
                     ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Row(
+                  children: [
+                    Text('Фаил сохранения: ${widgetModel.output}'),
+                    IconButton(
+                      onPressed: widgetModel.setOutput,
+                      icon: Icon(Icons.settings,),
+                    )
                   ],
                 ),
               ),
