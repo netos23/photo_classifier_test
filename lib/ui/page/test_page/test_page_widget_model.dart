@@ -27,13 +27,12 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
     locationConfigModel.filters
         .where(
           (element) => element.include,
-    )
+        )
         .where(
           (element) => element.itemsCount > 0,
-    )
+        )
         .forEach(
-          (element) =>
-          variants.add(
+          (element) => variants.add(
             Pair(
               element.topicName,
               Directory(element.path)
@@ -43,10 +42,10 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
                   .toList(),
             ),
           ),
-    );
+        );
 
     final maxVariants =
-    min(testConfigModel.maxVariantsCount ?? 4, variants.length);
+        min(testConfigModel.maxVariantsCount ?? 4, variants.length);
     final random = Random();
 
     for (int i = 0; i < maxQuestions; i++) {
@@ -57,9 +56,7 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
       if (maxVariants != variants.length) {
         for (int j = 0; j < maxVariants; j++) {
           final nextIndex = ((random.nextInt(variants.length) ^ index) +
-              (DateTime
-                  .now()
-                  .millisecondsSinceEpoch ^ index)) %
+                  (DateTime.now().millisecondsSinceEpoch ^ index)) %
               variants.length;
           answers.add(variants[nextIndex].key);
         }
@@ -100,9 +97,7 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
         image: question.image,
         answers: question.answers,
         correctIndex: question.correctIndex,
-        beginTimestamp: DateTime
-            .now()
-            .millisecondsSinceEpoch,
+        beginTimestamp: DateTime.now().millisecondsSinceEpoch,
       );
 
       questions[state.current] = question;
@@ -126,9 +121,7 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
     if (isClosed || finished) {
       return '';
     }
-    var nowTime = DateTime
-        .now()
-        .millisecondsSinceEpoch;
+    var nowTime = DateTime.now().millisecondsSinceEpoch;
     final delta =
         nowTime - (state.questions[state.current].beginTimestamp ?? nowTime);
     if (state.lastUpdate == null) {
@@ -144,18 +137,10 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
     }
     Future.delayed(
       Duration(milliseconds: 900),
-          () => timeSinceStart,
+      () => timeSinceStart,
     );
 
-    final dateTime = DateTime(
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        delta,
-        0);
+    final dateTime = DateTime(0, 0, 0, 0, 0, 0, delta, 0);
     return '${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
   }
 
@@ -179,9 +164,7 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
           correctIndex: question.correctIndex,
           actualIndex: index,
           beginTimestamp: question.beginTimestamp,
-          endTimestamp: DateTime
-              .now()
-              .millisecondsSinceEpoch);
+          endTimestamp: DateTime.now().millisecondsSinceEpoch);
       questions[state.current] = question;
       emit(
         TestPageModel(
@@ -197,8 +180,13 @@ class TestPageWidgetModel extends Cubit<TestPageModel> {
         final output = File(state.output);
         final text = StringBuffer();
         for (var question in questions) {
-          text.write('${question.beginTimestamp} ');
-          text.write('${question.endTimestamp} ');
+          final delta =
+              (question.endTimestamp ?? 0) - (question.beginTimestamp ?? 0);
+          final correct =
+              question.answers[question.actualIndex ?? 0].hashCode ==
+                  question.correctIndex;
+          text.write('${delta} ');
+          text.write('${correct} ');
           text.write('${question.image.path} ');
           text.writeln('${question.answers[question.actualIndex ?? 0]} ');
         }
