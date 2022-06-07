@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
     final testConfig = context.read<TestConfigWidgetModel>();
     return FutureBuilder(
       future: Future.sync(() => {
-        if(testConfig.validate){
-
+        if(!testConfig.validate){
+            Navigator.of(context).pushNamed('/')
         }
       }),
       builder: (context, snap){
